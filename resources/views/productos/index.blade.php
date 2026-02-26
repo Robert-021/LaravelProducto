@@ -9,7 +9,7 @@
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
             <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>Categoría</th>
                 <th>Precio</th>
