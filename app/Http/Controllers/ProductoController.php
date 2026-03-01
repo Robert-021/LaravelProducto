@@ -15,7 +15,31 @@ class ProductoController extends Controller
             $query->where('estado', $request->estado);
         }
 
-        $productos = $query->latest()->paginate(10)->withQueryString();
+        // Ordenamiento
+        $orden = $request->input('ordenar_por', 'id_asc');
+        switch ($orden) {
+            case 'id_desc':
+                $query->orderBy('id', 'desc');
+                break;
+            case 'nombre_asc':
+                $query->orderBy('nombre', 'asc');
+                break;
+            case 'nombre_desc':
+                $query->orderBy('nombre', 'desc');
+                break;
+            case 'precio_asc':
+                $query->orderBy('precio', 'asc');
+                break;
+            case 'precio_desc':
+                $query->orderBy('precio', 'desc');
+                break;
+            case 'id_asc':
+            default:
+                $query->orderBy('id', 'asc'); // Más antiguo primero
+                break;
+        }
+
+        $productos = $query->paginate(10)->withQueryString();
 
         return view('productos.index', compact('productos'));
     }

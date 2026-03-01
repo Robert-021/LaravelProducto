@@ -18,8 +18,19 @@
                     </select>
                 </div>
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-secondary">Filtrar</button>
-                    @if(request()->filled('estado'))
+                    <label class="visually-hidden" for="ordenar_por">Ordenar por</label>
+                    <select class="form-select" id="ordenar_por" name="ordenar_por">
+                        <option value="id_asc" {{ request('ordenar_por', 'id_asc') === 'id_asc' ? 'selected' : '' }}>Antiguos primero</option>
+                        <option value="id_desc" {{ request('ordenar_por') === 'id_desc' ? 'selected' : '' }}>Nuevos primero</option>
+                        <option value="nombre_asc" {{ request('ordenar_por') === 'nombre_asc' ? 'selected' : '' }}>Nombre (A-Z)</option>
+                        <option value="nombre_desc" {{ request('ordenar_por') === 'nombre_desc' ? 'selected' : '' }}>Nombre (Z-A)</option>
+                        <option value="precio_asc" {{ request('ordenar_por') === 'precio_asc' ? 'selected' : '' }}>Precio (Menor a Mayor)</option>
+                        <option value="precio_desc" {{ request('ordenar_por') === 'precio_desc' ? 'selected' : '' }}>Precio (Mayor a Menor)</option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-secondary">Aplicar</button>
+                    @if(request()->filled('estado') || request()->filled('ordenar_por') && request('ordenar_por') !== 'id_asc')
                         <a href="{{ route('productos.index') }}" class="btn btn-outline-secondary">Limpiar</a>
                     @endif
                 </div>
