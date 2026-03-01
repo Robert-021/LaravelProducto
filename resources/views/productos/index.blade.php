@@ -6,6 +6,27 @@
         <a href="{{ route('productos.create') }}" class="btn btn-primary">+ Nuevo Producto</a>
     </div>
 
+    <div class="card mb-4">
+        <div class="card-body">
+            <form action="{{ route('productos.index') }}" method="GET" class="row gx-3 gy-2 align-items-center">
+                <div class="col-auto">
+                    <label class="visually-hidden" for="estado">Filtrar por Estado</label>
+                    <select class="form-select" id="estado" name="estado">
+                        <option value="">Todos los Estados</option>
+                        <option value="1" {{ request('estado') === '1' ? 'selected' : '' }}>Activos</option>
+                        <option value="0" {{ request('estado') === '0' ? 'selected' : '' }}>Inactivos</option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-secondary">Filtrar</button>
+                    @if(request()->filled('estado'))
+                        <a href="{{ route('productos.index') }}" class="btn btn-outline-secondary">Limpiar</a>
+                    @endif
+                </div>
+            </form>
+        </div>
+    </div>
+
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
             <tr>

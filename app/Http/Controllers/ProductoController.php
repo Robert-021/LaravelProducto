@@ -7,9 +7,16 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::latest()->paginate(10);
+        $query = Producto::query();
+
+        if ($request->filled('estado')) {
+            $query->where('estado', $request->estado);
+        }
+
+        $productos = $query->latest()->paginate(10)->withQueryString();
+
         return view('productos.index', compact('productos'));
     }
 
