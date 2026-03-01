@@ -9,6 +9,13 @@
             <p><strong>Categoría:</strong> {{ $producto->categoria }}</p>
             <p><strong>Precio:</strong> ${{ number_format($producto->precio, 2) }}</p>
             <p><strong>Stock:</strong> {{ $producto->stock }} unidades</p>
+            <p><strong>Estado:</strong> 
+                @if($producto->estado)
+                    <span class="badge bg-success">Activo</span>
+                @else
+                    <span class="badge bg-danger">Inactivo</span>
+                @endif
+            </p>
             <p><strong>Descripción:</strong> {{ $producto->descripcion ?? 'Sin descripción' }}</p>
         </div>
         <div class="card-footer">

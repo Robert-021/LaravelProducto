@@ -14,6 +14,7 @@
                 <th>Categoría</th>
                 <th>Precio</th>
                 <th>Stock</th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -25,6 +26,13 @@
                     <td>{{ $producto->categoria }}</td>
                     <td>${{ number_format($producto->precio, 2) }}</td>
                     <td>{{ $producto->stock }}</td>
+                    <td>
+                        @if($producto->estado)
+                            <span class="badge bg-success">Activo</span>
+                        @else
+                            <span class="badge bg-danger">Inactivo</span>
+                        @endif
+                    </td>
                     <td>
                         <a href="{{ route('productos.show', $producto) }}" class="btn btn-sm btn-info">Ver</a>
                         <a href="{{ route('productos.edit', $producto) }}" class="btn btn-sm btn-warning">Editar</a>
@@ -38,7 +46,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="text-center text-muted">No hay productos registrados.</td>
+                    <td colspan="7" class="text-center text-muted">No hay productos registrados.</td>
                 </tr>
             @endforelse
         </tbody>
