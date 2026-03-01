@@ -55,6 +55,14 @@
                         @endif
                     </td>
                     <td>
+                        <form action="{{ route('productos.toggleEstado', $producto) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="btn btn-sm {{ $producto->estado ? 'btn-outline-danger' : 'btn-outline-success' }}" 
+                                    title="{{ $producto->estado ? 'Desactivar' : 'Activar' }}">
+                                <i class="bi {{ $producto->estado ? 'bi-x-circle' : 'bi-check-circle' }}"></i>
+                            </button>
+                        </form>
                         <a href="{{ route('productos.show', $producto) }}" class="btn btn-sm btn-info">Ver</a>
                         <a href="{{ route('productos.edit', $producto) }}" class="btn btn-sm btn-warning">Editar</a>
                         <form action="{{ route('productos.destroy', $producto) }}" method="POST" class="d-inline"

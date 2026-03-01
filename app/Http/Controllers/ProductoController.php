@@ -72,4 +72,14 @@ class ProductoController extends Controller
         return redirect()->route('productos.index')
             ->with('success', 'Producto eliminado exitosamente.');
     }
+
+    public function toggleEstado(Producto $producto)
+    {
+        $producto->estado = !$producto->estado;
+        $producto->save();
+
+        $mensaje = $producto->estado ? 'Activo' : 'Inactivo';
+
+        return back()->with('success', "Estado del producto cambiado a $mensaje exitosamente.");
+    }
 }
